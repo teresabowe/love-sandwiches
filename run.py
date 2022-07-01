@@ -120,7 +120,10 @@ def get_stock_values(data):
     headings_test = SHEET.worksheet("stock").get_all_values()
     headings = headings_test[0]
     
-    return headings
+    dictionary_stk = {}
+    for key, value in zip(headings, data):
+        dictionary_stk[key] = value
+    return dictionary_stk
 
 def main():
     """
@@ -134,8 +137,9 @@ def main():
     sales_columns = get_last_5_entries_sales()
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, "stock")
-    get_headings = get_stock_values(data)
-    print(get_headings)
+    print(stock_data)
+    stock_values = get_stock_values(stock_data)
+    print(stock_values)
 
 print("Welcome to Love Sandwiches Data Automation")
 main()
